@@ -57,6 +57,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+                <requiresUnpack>
+                    <dependency>
+                        <groupId>br.com.eso</groupId>
+                        <artifactId>password-checker</artifactId>
+                    </dependency>
+                </requiresUnpack>
+            </configuration>
 			</plugin>
 		</plugins>
 	</build>
