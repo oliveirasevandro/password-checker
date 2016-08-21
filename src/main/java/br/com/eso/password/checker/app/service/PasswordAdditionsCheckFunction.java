@@ -14,46 +14,46 @@ public class PasswordAdditionsCheckFunction implements Function<String, Long> {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(PasswordAdditionsCheckFunction.class);
 	
-	private Function<String, Long> calculateLength = password -> {
+	Function<String, Long> calculateLength = password -> {
 		long result = new Long(password.length() * 4);
 		LOG.info("Number of Characters: {}", result);
 		return result;
 	};
 	
-	private Function<String, Long> calculateUpperCase = password -> {
+	Function<String, Long> calculateUpperCase = password -> {
 		long countUpperCase = countUpperCase(password);
 		long result = countUpperCase > 0 ? (password.length() - countUpperCase) * 2 : 0;
 		LOG.info("Uppercase Letters: {}", result);
 		return result;
 	};
 	
-	private Function<String, Long> calculateLowerCase = password -> {
+	Function<String, Long> calculateLowerCase = password -> {
 		long countLowerCase = countLowerCase(password);
 		long result = countLowerCase > 0 ? (password.length() - countLowerCase) * 2 : 0;
 		LOG.info("Lowercase Letters: {}", result);
 		return result;
 	};
 
-	private Function<String, Long> calculateNumbers = password -> {
+	Function<String, Long> calculateNumbers = password -> {
 		long result = countNumbers(password) * 4;
 		LOG.info("Numbers: {}", result);
 		return result;
 	};
 	
-	private Function<String, Long> calculateSymbols = password -> {
+	Function<String, Long> calculateSymbols = password -> {
 		long result = countSymbols(password) * 6;
 		LOG.info("Symbols: {}", result);
 		return result;
 	};
 	
-	private Function<String, Long> calculateMiddleNumbersOrSymbols = password -> {
+	Function<String, Long> calculateMiddleNumbersOrSymbols = password -> {
 		final String subString = password.substring(1, password.length() - 1);
 		long result = (countNumbers(subString) + countSymbols(subString)) * 2;
 		LOG.info("Middle Numbers or Symbols: {}", result);
 		return result;
 	};
 	
-	private Function<String, Long> calculateRequirements = password -> {
+	Function<String, Long> calculateRequirements = password -> {
 		int requirements = countUpperCase(password) > 0 ? 1 : 0;
 		requirements += countLowerCase(password) > 0 ? 1 : 0;
 		requirements += countNumbers(password) > 0 ? 1 : 0;
@@ -79,7 +79,7 @@ public class PasswordAdditionsCheckFunction implements Function<String, Long> {
 
 	@Override
 	public Long apply(String password) {
-		
+		LOG.info("---- Applying Additions ----");
 		return additions.stream()
 			.mapToLong(function -> function.apply(password))
 			.sum();
