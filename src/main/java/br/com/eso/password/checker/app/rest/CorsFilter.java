@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.ext.Provider;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -17,7 +18,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-class CorsFilter implements Filter {
+@Provider
+public class CorsFilter implements Filter {
 
 	@Override
 	public void destroy() {
